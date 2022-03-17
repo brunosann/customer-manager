@@ -31,7 +31,7 @@ export const User = sequelize.define<UserInstance>(
       type: DataTypes.STRING,
     },
     isAdmin: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.TINYINT,
     },
     createdAt: {
       type: DataTypes.DATE,
