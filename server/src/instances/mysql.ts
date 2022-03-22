@@ -10,5 +10,9 @@ export const sequelize = new Sequelize(
   {
     dialect: "mysql",
     port: Number(process.env.DB_PORT),
+    timezone: "-03:00",
+    dialectOptions: {
+      useUTC: false,
+    },
   }
 );

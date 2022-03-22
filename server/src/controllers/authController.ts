@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";
+import { nanoid } from "nanoid";
 import { User } from "../models/User";
+import { PasswordReset } from "../models/PasswordReset";
+import { emailForgotPassword } from "../services/sendEmail";
 
 dotenv.config();
 
@@ -27,4 +30,21 @@ export const login = async (req: Request, res: Response) => {
   const userData = { name: user.name, email: user.email, isAdmin: user.isAdmin };
 
   res.json({ user: userData, token });
+};
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  const { email } = req.body;
+  const user = await User.findOne({ where: { email } });
+
+  if (!user)
+    return res.status(404).json({ error: "Desculpe, mas não encontramos sua conta" });
+
+  const code = nanoid(8);
+  const expireIn = new Date();
+  expireIn.setHours(expireIn.getHours() + 1);
+
+  await PasswordReset.create({ email, code, expireIn });
+  await emailForgotPassword(code, email);
+
+  res.json({});
 };
