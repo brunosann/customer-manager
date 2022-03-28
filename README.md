@@ -14,6 +14,7 @@
 
   ```
   composer install
+  npm install
   ```
 
 - Copiar arquivo `.env.example` e criar o arquivo `.env`
