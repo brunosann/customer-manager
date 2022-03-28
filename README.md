@@ -17,7 +17,13 @@
   ```
 
 - Copiar arquivo `.env.example` e criar o arquivo `.env`
+
 - Setar suas variáveis de DB no `.env`
+
+- Rodar migrations (tabelas do DB), Terminal:
+  ```
+  php artisan migrate
+  ```
 
 ### Andamento do Projeto:
 
