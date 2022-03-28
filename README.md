@@ -2,13 +2,22 @@
 
 ### Pré-requisitos globais:
 
-`Node v16.13.2`
-`npm i -g nodemon typescript ts-node`
-`mysql`
+`PHP >= 8.1, Composer, `
+`NodeJs, `
+`Mysql`
 
 ### Instalação
 
-`npm install`
+- Clonar projeto na sua maquina
+
+- Terminal:
+
+  ```
+  composer install
+  ```
+
+- Copiar arquivo `.env.example` e criar o arquivo `.env`
+- Setar suas variáveis de DB no `.env`
 
 ### Andamento do Projeto:
 
