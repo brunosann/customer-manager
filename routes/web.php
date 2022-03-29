@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  return view('home');
+
+Route::middleware('auth')->group(function () {
+  Route::get('/', function () {
+    return view('home');
+  });
 });
+
+Route::view('/entrar', 'login')->name('login');
