@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
   Route::get('/', function () {
     return view('home');
-  });
+  })->name('home');
 });
 
 Route::view('/entrar', 'login')->name('login');
+Route::post('/entrar', [AuthController::class, 'login'])->name('login.submit');
