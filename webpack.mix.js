@@ -15,4 +15,4 @@ mix
   .js("resources/js/app.js", "public/js")
   .sass("resources/css/default.scss", "public/css")
   .sass("resources/css/app.scss", "public/css")
-  .sass("resources/css/login.scss", "public/css");
+  .sass("resources/css/auth.scss", "public/css");

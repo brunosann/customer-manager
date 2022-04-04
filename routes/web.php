@@ -23,3 +23,4 @@ Route::middleware('auth')->group(function () {
 
 Route::view('/entrar', 'login')->name('login');
 Route::post('/entrar', [AuthController::class, 'login'])->name('login.submit');
+Route::view('redefinir-senha', 'forgot-password')->name('forgot.password');
