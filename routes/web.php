@@ -23,4 +23,7 @@ Route::middleware('auth')->group(function () {
 
 Route::view('/entrar', 'login')->name('login');
 Route::post('/entrar', [AuthController::class, 'login'])->name('login.submit');
-Route::view('redefinir-senha', 'forgot-password')->name('forgot.password');
+Route::view('/redefinir-senha', 'forgot-password')->name('forgot.password');
+Route::post('/redefinir-senha', [AuthController::class, 'forgotPassword'])->name('forgot.password.submit');
+Route::get('/alterar-senha/{token}', [AuthController::class, 'showPasswordReset'])->name('password.reset');
+Route::post('/alterar-senha', [AuthController::class, 'passwordReset'])->name('password.reset.submit');
