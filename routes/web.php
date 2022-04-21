@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,8 @@ Route::middleware('auth')->group(function () {
   Route::get('/', function () {
     return view('home');
   })->name('home');
+  Route::get('/cliente/criar', [ClientController::class, 'create'])->name('client.create');
+  Route::get('auth/sair', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::view('/entrar', 'login')->name('login');

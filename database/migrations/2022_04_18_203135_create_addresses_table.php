@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('street', 70)->nullable();
             $table->string('number', 20)->nullable();
             $table->string('district', 50)->nullable();
-            $table->string('complemento', 70)->nullable();
+            $table->string('complement', 70)->nullable();
             $table->string('zip_code', 16)->nullable();
             $table->foreignId('client_id')
                 ->constrained('clients')
