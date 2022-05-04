@@ -33,8 +33,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="doc" class="label">Cpf / Cnpj</label>
-      <input type="text" class="input" placeholder="Cpf / Cnpj" name="doc" id="doc">
+      <label for="doc" class="label">Cpf</label>
+      <input type="text" class="input" placeholder="Cpf" name="doc" id="doc">
     </div>
 
     <div class="input-group">
@@ -53,7 +53,7 @@
     <div class="input-group">
       <div class="mb-3 zip_code">
         <label for="zip_code" class="label">Cep</label>
-        <input type="text" class="input" placeholder="Cep" name="address_zip_code" id="zip_code">
+        <input type="text" class="input" placeholder="Cep" name="address_zip_code" id="zip_code" maxlength="9">
       </div>
       <div class="mb-3">
         <label for="number" class="label">Numero</label>
