@@ -9,11 +9,15 @@
 @section('content')
 <h2 class="title">Cadastrar <strong>Cliente</strong></h2>
 
-<form id="form-client" action="" method="post">
+<form id="form-client" action="{{ route('client.store') }}" method="post">
+  @csrf
   <div class="box-inputs">
     <div class="mb-3">
       <label for="name" class="label">Nome</label>
-      <input type="text" class="input" placeholder="Cliente" name="name" id="name">
+      <input type="text" class="input" placeholder="Cliente" name="name" id="name" value="{{ old('name') }}">
+      @error('name')
+      <p class="error">{{ $message }}</p>
+      @enderror
     </div>
 
     <div class="mb-3">
@@ -34,7 +38,10 @@
 
     <div class="mb-3">
       <label for="doc" class="label">Cpf</label>
-      <input type="text" class="input" placeholder="Cpf" name="doc" id="doc">
+      <input type="text" class="input" placeholder="Cpf" name="doc" id="doc" value="{{ old('doc') }}">
+      @error('doc')
+      <p class="error">{{ $message }}</p>
+      @enderror
     </div>
 
     <div class="input-group">
@@ -114,7 +121,7 @@
         </div>
         <div class="mb-3">
           <label for="cell_value" class="label">Valor</label>
-          <input type="number" class="input" placeholder="Valor" name="info_cell_value" id="cell_value">
+          <input type="number" step="any" class="input" placeholder="Valor" name="info_cell_value" id="cell_value">
         </div>
       </div>
     </div>
@@ -143,7 +150,7 @@
         </div>
         <div class="mb-3">
           <label for="net_value" class="label">Valor</label>
-          <input type="number" class="input" placeholder="Valor" name="info_net_value" id="net_value">
+          <input type="number" step="any" class="input" placeholder="Valor" name="info_net_value" id="net_value">
         </div>
       </div>
     </div>
@@ -173,7 +180,8 @@
         </div>
         <div class="mb-3">
           <label for="telephone_value" class="label">Valor</label>
-          <input type="number" class="input" placeholder="Valor" name="info_telephone_value" id="telephone_value">
+          <input type="number" step="any" class="input" placeholder="Valor" name="info_telephone_value"
+            id="telephone_value">
         </div>
       </div>
     </div>
@@ -202,7 +210,7 @@
         </div>
         <div class="mb-3">
           <label for="tv_value" class="label">Valor</label>
-          <input type="number" class="input" placeholder="Valor" name="info_tv_value" id="tv_value">
+          <input type="number" step="any" class="input" placeholder="Valor" name="info_tv_value" id="tv_value">
         </div>
       </div>
     </div>
@@ -232,7 +240,7 @@
     </div>
   </div>
 
-  <button class="btn btn-client" type="button">Salvar</button>
+  <button class="btn btn-client" type="submit">Salvar</button>
 </form>
 @endsection
 

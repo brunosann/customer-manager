@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     return view('home');
   })->name('home');
   Route::get('/cliente/criar', [ClientController::class, 'create'])->name('client.create');
+  Route::post('/cliente', [ClientController::class, 'store'])->name('client.store');
   Route::get('auth/sair', [AuthController::class, 'logout'])->name('logout');
 });
 

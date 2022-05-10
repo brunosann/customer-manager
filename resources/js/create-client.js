@@ -1,4 +1,4 @@
-import { S, SS, maskCPF, maskCNPJ, maskCEP } from "./utils";
+import { S, SS, maskCPF, maskCNPJ, maskCEP, maskPhone } from "./utils";
 
 // toggle show or hide plans radios
 const radiosToggle = SS(
@@ -81,3 +81,9 @@ const handleZipCodeMaks = (e) => {
 zipCode.addEventListener("input", handleZipCodeMaks);
 zipCode.addEventListener("blur", handleGetAddress);
 // get address by zip code
+
+const elPhone = S("#contact");
+const handlePhoneMaks = (e) => {
+  e.target.value = maskPhone(e.target.value);
+};
+elPhone.addEventListener("input", handlePhoneMaks);
