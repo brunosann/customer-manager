@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientStoreRequest;
+use App\Http\Requests\ClientUpdateRequest;
 use App\Models\{Address, Client, ClientInformation};
 use App\Services\ClientService;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class ClientController extends Controller
     public function store(ClientStoreRequest $request)
     {
         $clientData = $request->all();
-        $clientData['cpf/cnpj'] =  $clientData['doc'];
+        $clientData['cpf/cnpj'] = $clientData['doc'];
 
         DB::transaction(function () use ($clientData, $request) {
             $client = Client::create($clientData);
@@ -31,6 +32,36 @@ class ClientController extends Controller
             $clientInfoWithoutPrefix = ClientService::removeRequestPrefix($clientInfo, 'info_');
             $clientInfoWithoutPrefix->put('client_id', $client->id);
             ClientInformation::create($clientInfoWithoutPrefix->toArray());
+        });
+
+        return redirect(route('home'));
+    }
+
+    public function edit($id)
+    {
+        $client = Client::where('id', $id)
+            ->with(['address', 'information'])
+            ->first();
+
+        return view('client.edit', compact('client'));
+    }
+
+    public function update(ClientUpdateRequest $request, $id)
+    {
+        $clientDataUpdate = $request->all();
+        $clientDataUpdate['cpf/cnpj'] = $clientDataUpdate['doc'];
+
+        DB::transaction(function () use ($clientDataUpdate, $request, $id) {
+            $client = Client::find($id);
+            $client->update($clientDataUpdate);
+
+            $address = ClientService::getDataByRequestPrefix($request->all(), 'address');
+            $addressWithoutPrefix = ClientService::removeRequestPrefix($address, 'address_');
+            Address::where('client_id', $id)->update($addressWithoutPrefix->toArray());
+
+            $clientInfo = ClientService::getDataByRequestPrefix($request->all(), 'info');
+            $clientInfoWithoutPrefix = ClientService::removeRequestPrefix($clientInfo, 'info_');
+            ClientInformation::where('client_id', $id)->update($clientInfoWithoutPrefix->toArray());
         });
 
         return redirect(route('home'));

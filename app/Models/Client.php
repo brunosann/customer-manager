@@ -21,4 +21,14 @@ class Client extends Model
     protected $casts = [
         'interested' => 'boolean',
     ];
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
+
+    public function information()
+    {
+        return $this->hasOne(ClientInformation::class);
+    }
 }

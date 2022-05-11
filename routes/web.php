@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
   })->name('home');
   Route::get('/cliente/criar', [ClientController::class, 'create'])->name('client.create');
   Route::post('/cliente', [ClientController::class, 'store'])->name('client.store');
+  Route::get('/cliente/{id}/editar', [ClientController::class, 'edit'])->name('client.edit');
+  Route::patch('/cliente/{id}', [ClientController::class, 'update'])->name('client.update');
   Route::get('auth/sair', [AuthController::class, 'logout'])->name('logout');
 });
 
