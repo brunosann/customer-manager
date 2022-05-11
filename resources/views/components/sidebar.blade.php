@@ -2,7 +2,7 @@
   <div>
     <h1 class="title-brand">Clientes Denise</h1>
     <nav class="links">
-      <a href="{{ route('home') }}" class="link-sidebar">Dashboard</a>
+      <a href="{{ route('client.index') }}" class="link-sidebar">Dashboard</a>
       <a href="{{ route('client.create') }}" class="link-sidebar">Novo Cliente</a>
       <a href="#" class="link-sidebar">Sobre</a>
     </nav>

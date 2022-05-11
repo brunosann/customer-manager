@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')->group(function () {
-  Route::get('/', function () {
-    return view('home');
-  })->name('home');
+  Route::get('/', [ClientController::class, 'index'])->name('client.index');
   Route::get('/cliente/criar', [ClientController::class, 'create'])->name('client.create');
   Route::post('/cliente', [ClientController::class, 'store'])->name('client.store');
   Route::get('/cliente/{id}/editar', [ClientController::class, 'edit'])->name('client.edit');

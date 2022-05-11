@@ -61,7 +61,7 @@
       <h2 class="text-body">Clientes</h2>
       <span class="date">Março de 2022</span>
     </div>
-    <a href="#" class="btn btn-clients">Novo +</a>
+    <a href="{{ route('client.create') }}" class="btn btn-clients">Novo +</a>
   </article>
 
   <ul class="list">
@@ -72,23 +72,24 @@
       <span>Ações</span>
     </li>
 
-    @for ($i = 0; $i < 20; $i++) <li class="list-item">
-      <p class="value">Fulano da Silva Fulano da Silva</p>
-      <p class="value">44 9 99988999</p>
-      <p class="value">765.959.680-29</p>
+    @foreach ($clients as $client)
+    <li class="list-item">
+      <p class="value">{{ $client->name }}</p>
+      <p class="value">{{ $client->contact }}</p>
+      <p class="value">{{ $client->{'cpf/cnpj'} }}</p>
       <div class="actions">
         <button type="button" class="btn-list">
           <img src="{{ asset('images/visible.png') }}" alt="visualizar" title="visualizar">
         </button>
-        <button type="button" class="btn-list">
+        <a href="{{ route('client.edit', [$client->id]) }}" class="btn-list">
           <img src="{{ asset('images/edit.png') }}" alt="editar" title="editar">
-        </button>
+        </a>
         <button type="button" class="btn-list">
           <img src="{{ asset('images/trash.png') }}" alt="apagar" title="apagar">
         </button>
       </div>
-      </li>
-      @endfor
+    </li>
+    @endforeach
   </ul>
 </section>
 

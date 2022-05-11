@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
+    public function index()
+    {
+        $clients = Client::all(['id', 'name', 'contact', 'cpf/cnpj']);
+        return view('home', compact('clients'));
+    }
+
     public function create()
     {
         return view('client.store');
@@ -34,7 +40,7 @@ class ClientController extends Controller
             ClientInformation::create($clientInfoWithoutPrefix->toArray());
         });
 
-        return redirect(route('home'));
+        return redirect(route('client.index'));
     }
 
     public function edit($id)
@@ -64,6 +70,6 @@ class ClientController extends Controller
             ClientInformation::where('client_id', $id)->update($clientInfoWithoutPrefix->toArray());
         });
 
-        return redirect(route('home'));
+        return redirect(route('client.index'));
     }
 }
