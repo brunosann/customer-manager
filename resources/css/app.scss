@@ -240,7 +240,7 @@ main {
     gap: 0.5rem;
 
     .page-item {
-      button {
+      a {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -251,6 +251,7 @@ main {
         color: $black;
         background-color: transparent;
         transition: 0.4s all;
+        text-decoration: none;
 
         &:hover,
         &.active {
@@ -268,6 +269,7 @@ main {
     padding: 0.35rem 0.5rem;
     border-radius: 0.25rem;
     transition: 0.4s all;
+    text-decoration: none;
 
     &:hover {
       background-color: $black;

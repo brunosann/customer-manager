@@ -91,23 +91,8 @@
     </li>
     @endforeach
   </ul>
+  {{ $clients->links('components.pagination') }}
 </section>
-
-<nav class="pagination">
-  <button type="button" class="btn-pagination">Voltar</button>
-  <ul class="list-pages">
-    <li class="page-item">
-      <button type="button">1</button>
-    </li>
-    <li class="page-item">
-      <button type="button">2</button>
-    </li>
-    <li class="page-item">
-      <button type="button">30</button>
-    </li>
-  </ul>
-  <button type="button" class="btn-pagination">Próximo</button>
-</nav>
 
 @endsection
 
