@@ -4,6 +4,7 @@
     <nav class="links">
       <a href="{{ route('client.index') }}" class="link-sidebar">Dashboard</a>
       <a href="{{ route('client.create') }}" class="link-sidebar">Novo Cliente</a>
+      <a href="{{ route('logout') }}" class="link-sidebar">Sair</a>
       <a href="#" class="link-sidebar">Sobre</a>
     </nav>
   </div>
