@@ -6,13 +6,18 @@ use App\Http\Requests\ClientStoreRequest;
 use App\Http\Requests\ClientUpdateRequest;
 use App\Models\{Address, Client, ClientInformation};
 use App\Services\ClientService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Client::select(['id', 'name', 'contact', 'cpf/cnpj'])->paginate(1);
+        $clients = Client::select(['id', 'name', 'contact', 'cpf/cnpj']);
+        if ($request->has('client')) $clients->byName($request->input('client'));
+        else $clients->filterByDates($request);
+        $clients = $clients->interested($request)->paginate();
+
         return view('home', compact('clients'));
     }
 

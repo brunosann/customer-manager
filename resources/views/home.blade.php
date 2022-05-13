@@ -11,9 +11,10 @@
     Bem Vindo de volta <strong class="text-body">Denise</strong>
     <span class="greetings-emoji">👋</span>
   </h2>
-  <form id="form-search">
+  <form id="form-search" method="GET">
     <div class="box-search">
-      <input type="search" name="client" class="input-search" placeholder="Buscar cliente...">
+      <input type="search" name="client" class="input-search" placeholder="Buscar cliente..."
+        value="{{ Request::input('client') }}">
       <button type="submit" class="btn-search">
         <img src="{{ asset('images/search.png') }}" alt="busca" title="busca">
       </button>
@@ -21,35 +22,36 @@
   </form>
 </header>
 
-<form id="form-filters">
+<form id="form-filters" method="GET">
   <div class="bg-gray-filters">
     <h3 class="text-body">Filtrar por:</h3>
     <div class="box-filters">
       <label class="label-filter">
-        <input type="checkbox" id="sold">
+        <input type="checkbox" id="sold" name="sold" value="1">
         <span>Vendidos</span>
       </label>
       <label class="label-filter">
-        <input type="checkbox" id="interested">
+        <input type="checkbox" id="interested" name="interested" {{ Request::has('interested') ? 'checked' : '' }}>
         <span>Interessados</span>
       </label>
     </div>
     <div class="box-filters">
       <label class="label-filter">
-        <input type="radio" name="date" id="day">
+        <input type="radio" name="date" id="day" value="day" {{ !Request::has('date') || Request::has('date')=='day'
+          ? 'checked' : '' }}>
         <span>Hoje</span>
       </label>
       <label class="label-filter">
-        <input type="radio" name="date" id="week">
+        <input type="radio" name="date" id="week" value="week" {{ Request::input('date')=='week' ? 'checked' : '' }}>
         <span>Essa Semana</span>
       </label>
       <label class="label-filter">
-        <input type="radio" name="date" id="month">
+        <input type="radio" name="date" id="month" value="month" {{ Request::input('date')=='month' ? 'checked' : '' }}>
         <span>Mês</span>
       </label>
     </div>
-    <div class="box-filters">
-      <input type="month" name="" id="filter-month">
+    <div class="line-radio {{ Request::input('date') == 'month' ? 'box-filters show' : '' }}">
+      <input type="month" name="month" id="filter-month" value="{{ Request::input('month') }}">
     </div>
   </div>
   <button type="submit" class="btn btn-filters">Filtrar</button>
@@ -78,9 +80,6 @@
       <p class="value">{{ $client->contact }}</p>
       <p class="value">{{ $client->{'cpf/cnpj'} }}</p>
       <div class="actions">
-        <button type="button" class="btn-list">
-          <img src="{{ asset('images/visible.png') }}" alt="visualizar" title="visualizar">
-        </button>
         <a href="{{ route('client.edit', [$client->id]) }}" class="btn-list">
           <img src="{{ asset('images/edit.png') }}" alt="editar" title="editar">
         </a>
@@ -97,5 +96,5 @@
 @endsection
 
 @section('javascript')
-
+<script src="{{ asset('js/app.js') }}"></script>
 @endsection

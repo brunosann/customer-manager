@@ -24,24 +24,6 @@
     resize: none;
   }
 
-  @keyframes show-line-radio {
-    to {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-
-  .line-radio {
-    display: none;
-    opacity: 0;
-    transform: translateY(-30px);
-
-    &.show {
-      display: block;
-      animation: show-line-radio 0.3s forwards;
-    }
-  }
-
   .box-inputs {
     background-color: #eeeeef82;
     padding: 0.8rem;
