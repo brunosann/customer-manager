@@ -1,4 +1,3 @@
-@if ($paginator->hasPages())
 <nav class="pagination">
   @if ($paginator->onFirstPage())
   <a class="btn-pagination" disabled>Voltar</a>
@@ -26,4 +25,3 @@
   <a class="btn-pagination" disabled>Próximo</a>
   @endif
 </nav>
-@endif

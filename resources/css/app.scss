@@ -2,6 +2,10 @@
 
 .container {
   display: flex;
+
+  &.overflow-hidden {
+    overflow: hidden;
+  }
 }
 
 .sidebar {
@@ -102,9 +106,50 @@ main {
 #form-filters {
   margin-bottom: 1rem;
 
+  @keyframes open-filters {
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+
   .bg-gray-filters {
     background-color: $gray-100;
-    padding: 0.8rem;
+    padding: 0 0.8rem 0.8rem 0.8rem;
+    display: none;
+    opacity: 0;
+    transform: translateY(-15px);
+
+    &.open {
+      display: block;
+      animation: open-filters 0.4s forwards;
+    }
+  }
+
+  .box-arrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eeeeef;
+    padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+
+    .btn-arrow {
+      display: flex;
+      align-items: center;
+      width: 20px;
+      background: none;
+      border: none;
+
+      &.open {
+        img {
+          transform: rotate(180deg);
+        }
+      }
+
+      img {
+        max-width: 100%;
+      }
+    }
   }
 
   .box-filters {
@@ -284,8 +329,21 @@ main {
 }
 
 @media (max-width: 760px) {
+  @keyframes show-sidebar {
+    to {
+      transform: translateX(0px);
+    }
+  }
+
   .sidebar {
     display: none;
+    transform: translateX(-50px);
+
+    &.active {
+      display: flex;
+      min-width: 70%;
+      animation: show-sidebar 0.5s forwards;
+    }
   }
 
   main {
@@ -302,6 +360,8 @@ main {
         font-size: 1rem;
         margin: 0;
         padding: 0.35rem;
+        flex: 1;
+        text-align: center;
 
         .greetings-emoji {
           display: none;

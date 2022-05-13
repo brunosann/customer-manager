@@ -1,31 +1,28 @@
 @extends('layout.site')
 
+@section('header')
+<form id="form-search" method="GET">
+  <div class="box-search">
+    <input type="search" name="client" class="input-search" placeholder="Buscar cliente..."
+      value="{{ Request::input('client') }}">
+    <button type="submit" class="btn-search">
+      <img src="{{ asset('images/search.png') }}" alt="busca" title="busca">
+    </button>
+  </div>
+</form>
+@endsection
+
 @section('content')
-<header>
-  <button type="button" class="menu">
-    <span class="menu-line"></span>
-    <span class="menu-line"></span>
-    <span class="menu-line"></span>
-  </button>
-  <h2 class="greetings">
-    Bem Vindo de volta <strong class="text-body">Denise</strong>
-    <span class="greetings-emoji">👋</span>
-  </h2>
-  <form id="form-search" method="GET">
-    <div class="box-search">
-      <input type="search" name="client" class="input-search" placeholder="Buscar cliente..."
-        value="{{ Request::input('client') }}">
-      <button type="submit" class="btn-search">
-        <img src="{{ asset('images/search.png') }}" alt="busca" title="busca">
-      </button>
-    </div>
-  </form>
-</header>
 
 <form id="form-filters" method="GET">
-  <div class="bg-gray-filters">
+  <div class="box-arrow">
     <h3 class="text-body">Filtrar por:</h3>
-    <div class="box-filters">
+    <button type="button" class="btn-arrow">
+      <img src="{{ asset('images/arrow-down.png') }}" alt="flecha menu">
+    </button>
+  </div>
+  <div class="bg-gray-filters">
+    <div class="box-filters" style="margin: 0">
       <label class="label-filter">
         <input type="checkbox" id="sold" name="sold" value="1">
         <span>Vendidos</span>
@@ -90,8 +87,9 @@
     </li>
     @endforeach
   </ul>
-  {{ $clients->links('components.pagination') }}
 </section>
+
+{{ $clients->links('components.pagination') }}
 
 @endsection
 
