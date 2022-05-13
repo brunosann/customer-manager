@@ -3,7 +3,7 @@
 @section('title', 'Editar Cliente -')
 
 @section('head')
-<link rel="stylesheet" href="{{ asset('css/create-client.css') }}">
+<link rel="stylesheet" href="{{ mix('css/create-client.css') }}">
 @endsection
 
 @section('content')
@@ -297,7 +297,7 @@
 @endsection
 
 @section('javascript')
-<script src="{{ asset('js/create-client.js') }}"></script>
+<script src="{{ mix('js/create-client.js') }}"></script>
 <script>
 
 </script>

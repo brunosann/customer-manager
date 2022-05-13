@@ -19,3 +19,7 @@ mix
   .sass("resources/css/app.scss", "public/css")
   .sass("resources/css/auth.scss", "public/css")
   .sass("resources/css/create-client.scss", "public/css");
+
+if (mix.inProduction()) {
+  mix.version();
+}
