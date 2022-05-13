@@ -16,7 +16,9 @@ class ClientController extends Controller
         $clients = Client::select(['id', 'name', 'contact', 'cpf/cnpj']);
         if ($request->has('client')) $clients->byName($request->input('client'));
         else $clients->filterByDates($request);
-        $clients = $clients->interested($request)->paginate();
+        $clients = $clients->byUser($request->user()->id)
+            ->interested($request)
+            ->paginate();
 
         return view('home', compact('clients'));
     }
@@ -30,6 +32,7 @@ class ClientController extends Controller
     {
         $clientData = $request->all();
         $clientData['cpf/cnpj'] = $clientData['doc'];
+        $clientData['user_id'] = $request->user()->id;
 
         DB::transaction(function () use ($clientData, $request) {
             $client = Client::create($clientData);

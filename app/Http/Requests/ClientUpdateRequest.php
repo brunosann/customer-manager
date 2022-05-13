@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ClientUpdateRequest extends FormRequest
 {
@@ -24,10 +26,16 @@ class ClientUpdateRequest extends FormRequest
     public function rules()
     {
         $id = $this->route('id');
+        $userId = Auth::user()->id;
 
         return [
             'name' => ['required'],
-            'doc' => ['nullable', "unique:clients,cpf/cnpj,{$id},id"],
+            'doc' => [
+                'nullable',
+                Rule::unique('clients', 'cpf/cnpj')
+                    ->where(fn ($query) => $query->where('user_id', $userId))
+                    ->ignore($id)
+            ],
         ];
     }
 

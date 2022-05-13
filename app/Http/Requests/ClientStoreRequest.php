@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ClientStoreRequest extends FormRequest
 {
@@ -23,9 +25,14 @@ class ClientStoreRequest extends FormRequest
      */
     public function rules()
     {
+        $userId = Auth::user()->id;
+
         return [
             'name' => ['required'],
-            'doc' => ['nullable', 'unique:clients,cpf/cnpj'],
+            'doc' => [
+                'nullable',
+                Rule::unique('clients', 'cpf/cnpj')->where(fn ($query) => $query->where('user_id', $userId))
+            ],
         ];
     }
 

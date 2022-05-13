@@ -17,6 +17,7 @@ class Client extends Model
         'type',
         'cpf/cnpj',
         'interested',
+        'user_id',
     ];
 
     protected $casts = [
@@ -62,5 +63,10 @@ class Client extends Model
             $query->where('interested', true);
 
         return $query;
+    }
+
+    public function scopeByUser($query, $id)
+    {
+        return $query->where('user_id', $id);
     }
 }
