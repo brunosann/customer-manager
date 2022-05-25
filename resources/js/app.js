@@ -1,4 +1,6 @@
 import { SS, S } from "./utils";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 const matchMedia = window.matchMedia("(max-width: 700px)");
 
@@ -58,3 +60,35 @@ btnArrow.addEventListener("click", (e) => {
   target.classList.toggle("open");
   boxFiltersArrow.classList.toggle("open");
 });
+
+// delete client
+const handledeleteClient = async (e) => {
+  const confirmed = confirm("Deseja deletar o cliente?");
+  if (!confirmed) return;
+
+  const target = e.currentTarget;
+  const id = target.dataset.id;
+
+  const request = await fetch(`${BASE_URL}/cliente/${id}`, {
+    headers: {
+      "X-CSRF-Token": S('meta[name="_token"]').content,
+    },
+    method: "DELETE",
+  });
+  const response = await request.json();
+
+  if (request.ok) target.parentElement.parentElement.remove();
+
+  Toastify({
+    text: response.message,
+    duration: 5000,
+    close: true,
+    style: {
+      background: request.ok ? "#22c55e" : "#dc2626",
+    },
+  }).showToast();
+};
+
+const btnsDelete = SS("button.delete");
+btnsDelete.forEach((btn) => btn.addEventListener("click", handledeleteClient));
+// delete client

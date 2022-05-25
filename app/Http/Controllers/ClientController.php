@@ -80,4 +80,14 @@ class ClientController extends Controller
 
         return redirect(route('client.index'));
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $userId = $request->user()->id;
+        $deleted = Client::where('id', $id)->where('user_id', $userId)->delete();
+
+        $message = boolval($deleted) ? 'Cliente deletado' : 'Cliente não encontrado';
+        $statusCode = boolval($deleted) ? 200 : 404;
+        return response()->json(['message' => $message], $statusCode);
+    }
 }

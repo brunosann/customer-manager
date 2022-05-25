@@ -5,9 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="_token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ mix('css/default.css') }}">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   @yield('head')
+  <script>
+    const BASE_URL = '{{ env('APP_URL') }}'
+  </script>
   <title> @yield('title') Gerenciador de Clientes</title>
 </head>
 
@@ -23,7 +27,7 @@
           <span class="menu-line"></span>
         </button>
         <h2 class="greetings">
-          Bem Vindo de volta <strong class="text-body">Denise</strong>
+          Bem Vindo de volta <strong class="text-body">{{ Auth::user()->name }}</strong>
           <span class="greetings-emoji">👋</span>
         </h2>
         @yield('header')
